@@ -25,7 +25,7 @@ resources:
   xander:
     type: agent
     name: xander
-    description: Product and Engineering Communication Generalist
+    description: Xander Workflow is an AI-augmented generalist and the dedicated cross-functional communication layer between Product and Engineering teams. It resolves ambiguity in jargon and terminology across two distinct domains, keeping both teams aligned on a single, shared understanding.
     provider: cursor
     machine: '{machine}'
     directory: '{directory}'
