@@ -1,4 +1,4 @@
-# Xander Workflow
+# Xander Workflow: Cross-Functional Team Communication Layer
 
 **AI-Augmented Generalist | The Communication Layer Between Product and Engineering**
 
