@@ -1,174 +1,190 @@
-# Product–Engineering Clarity
+# Xander Workflow
 
-A portable **instruction and workflow preset** for an AI generalist agent called **Clarity**, which sits in a shared [Switch Console](#2-how-it-works) room and helps Product Management and Engineering understand each other.
+**AI-Augmented Generalist | The Communication Layer Between Product and Engineering**
 
-> **Status:** v1.0.0, documentation-only. This repository is not a messaging application, a backend, or an AI model. Switch-specific UI steps below are described generically because they vary by version and have not been verified against official Switch documentation. See [Known limitations](#20-known-limitations).
+**Xander Workflow** serves as an AI-augmented generalist and the dedicated cross-functional communication layer between Product and Engineering teams. It bridges the gap in jargon and terminology between two distinct domains, ensuring both teams work from a single, shared understanding.
+
+This repository is a portable **instruction and workflow preset** for the Xander agent. It runs inside a shared [Switch Console](https://github.com/sandbox-quantum/switch) room, powered by the AI CLI provider of your choice (Cursor, Codex, or Claude).
+
+> **Scope:** This repository contains instructions, context, and workflows. It is not a messaging application, a backend service, or an AI model.
 
 ---
 
-## 1. What this is
+## 1. Overview
 
-Product–Engineering Clarity is a reusable AI communication layer. You point a compatible agent at this repository, add it to one shared room, and it follows the instructions in [`AGENTS.md`](AGENTS.md) to translate **meaning and implications** — not just words — between Product and Engineering.
+Product knows customers, priorities, and outcomes. Engineering knows feasibility, architecture, and constraints. Different vocabularies lead to ambiguous requirements, repeated clarification, and lost time.
 
-Clarity is a neutral intermediary. It is **not** a coding assistant, project manager, generic chatbot, or decision-maker.
+Xander sits in a shared room with both teams and translates **meaning and implications**, not just words. It clarifies, translates, and surfaces trade-offs, while leaving every decision to people.
 
-## 2. How it works
+Xander is a neutral intermediary. It is not a coding assistant, project manager, or decision-maker.
 
-Three components:
+## 2. How It Works
 
-1. **Switch Console** — the communication infrastructure that connects people and AI agents through shared rooms.
-2. **Clarity (AI generalist agent)** — runs on a provider you configure (e.g. OpenCode with Gemini, or Codex).
-3. **This repository** — the agent's working directory, containing its permanent instructions, context, and workflows.
-
-```
- Product ─┐                       ┌─ reads AGENTS.md, context/, workflows/
-          ├─►  Switch room  ◄────►│  Clarity (agent provider of your choice)
- Engineers┘ product-engineering-clarity   working directory = this repo
-```
-
-## 3. The problem it solves
-
-Product knows customers, priorities, and outcomes. Engineering knows feasibility, architecture, and constraints. Different vocabularies lead to ambiguous requirements, repeated clarification, misread explanations, unrealistic expectations, conflicting priorities, and lost time. Clarity reduces that friction by clarifying, translating, and surfacing trade-offs, while leaving all decisions to people.
-
-## 4. Repository structure
+| Component | Role |
+|---|---|
+| **Switch Console** | The communication infrastructure that connects people and AI agents through shared rooms. |
+| **Xander (AI generalist agent)** | Runs on the provider you configure: Cursor, Codex, or Claude. |
+| **This repository** | The agent's working directory, holding its permanent instructions, context, and workflows. |
 
 ```
-product-engineering-clarity/
-├── AGENTS.md                        # Master operating instructions for Clarity
-├── README.md                        # This file
-├── config/
-│   ├── agent-instructions.md        # Onboarding prompt to paste into the agent config
-│   └── preset.yaml                  # Project-specific manifest (NOT a Switch schema)
-├── context/
-│   ├── product-team.md              # General reference profile: Product
-│   └── engineering-team.md          # General reference profile: Engineering
-├── instructions/
-│   ├── generalist-role.md           # Clarity's identity, responsibilities, boundaries
-│   └── communication-rules.md       # Tone, format, certainty labels
-├── workflows/
-│   ├── clarify.md                   # 1. Clarification
-│   ├── technical-to-business.md     # 2. Technical-to-Business Translation
-│   ├── business-to-technical.md     # 3. Business-to-Technical Translation
-│   ├── requirements-alignment.md    # 4. Requirements Alignment
-│   └── priority-alignment.md        # 5. Priority Alignment
-└── examples/
-    ├── 01-ambiguous-product-request.md
-    ├── 02-technical-explanation.md
-    └── 03-priority-disagreement.md
+ Product ──┐                          ┌─ reads AGENTS.md, context/, workflows/
+           ├─►  Switch room  ◄───────►│  Xander (provider of your choice)
+ Engineers ┘                          └─ working directory = this repo
 ```
 
-## 5. Prerequisites
+## 3. Prerequisites
 
-- Access to Switch Console and permission to create or configure agents and rooms.
-- Git.
-- An account/credentials for at least one compatible agent provider (Codex, or OpenCode plus a Gemini API key).
-- Product and Engineering teammates who will be invited to the room.
+Complete these before importing the preset.
 
-## 6. Clone the repository
+### 3.1 Switch Console
+
+Switch Console is the host application for the shared room.
+
+- **Source and installation:** [github.com/sandbox-quantum/switch](https://github.com/sandbox-quantum/switch)
+- **Documentation:** [docs.flintai.dev/flintai/switch](https://docs.flintai.dev/flintai/switch/index)
+
+Follow the official instructions to install Switch Console and connect it to your collaboration tool. Ensure you have permission to create agents and rooms.
+
+### 3.2 Agent CLI (choose at least one)
+
+Install and authenticate **one** of the following. Each must be able to run from the cloned repository directory.
+
+| Provider | Install (verify against official docs) | Authenticate | Official documentation |
+|---|---|---|---|
+| **Cursor CLI** | `curl https://cursor.com/install -fsS \| bash` | `cursor-agent login` | [cursor.com/cli](https://cursor.com/cli) |
+| **Codex CLI** | `npm install -g @openai/codex` | Run `codex` and sign in | [github.com/openai/codex](https://github.com/openai/codex) |
+| **Claude Code (Claude CLI)** | `npm install -g @anthropic-ai/claude-code` | Run `claude` and sign in | [docs.claude.com](https://docs.claude.com/en/docs/claude-code/overview) |
+
+> Installation methods change over time. If a command above fails, follow the official documentation linked in the table.
+
+### 3.3 Other requirements
+
+- Git
+- Node.js (required for the npm-based installs above)
+- Product and Engineering teammates to invite to the room
+
+## 4. Setup
+
+### Step 1. Clone the repository
 
 ```bash
-git clone <your-repository-url> product-engineering-clarity
+git clone https://github.com/SakaethRam/XANDER-WORKFLOW.git
+cd XANDER-WORKFLOW
 ```
 
-Replace `<your-repository-url>` with the URL where you host this repository.
+### Step 2. Confirm the CLI works from the repository
 
-## 7. Configure Codex as the agent provider
+From inside the cloned folder, launch your chosen CLI (`cursor-agent`, `codex`, or `claude`) once and confirm it starts and is authenticated.
 
-1. Install and authenticate Codex by following **OpenAI's official Codex documentation** for your operating system. Installation commands change, so none are reproduced here.
-2. Confirm Codex can run from the cloned repository directory.
-3. Make sure Switch Console can launch or connect to it according to Switch's documentation for supported agent providers.
+### Step 3. Import the preset into Switch Console
 
-## 8. Configure OpenCode with Gemini (free-tier alternative)
+Once the prerequisites in [Section 3](#3-prerequisites) are in place, import the **XANDER WORKFLOW** preset into Switch Console as a **custom template**, using the preset file in [`config/`](config/).
 
-1. Install OpenCode following **OpenCode's official documentation** for your operating system.
-2. Create a Gemini API key through Google's official process and configure OpenCode to use it, following OpenCode's provider-configuration documentation.
-3. Confirm OpenCode runs from the cloned repository directory.
-4. Connect it to Switch Console as in step 10 below.
+Set the agent's **working directory** to the absolute path of your cloned folder so Xander can read `AGENTS.md`, `context/`, and `workflows/`.
 
-> **Free-tier warning:** Gemini free-tier availability, quotas, and rate limits are subject to Google's current terms and may change. Do **not** assume free-tier data handling is suitable for confidential company information. Review Google's current terms before sending any internal or customer data. See [Privacy and security](#19-privacy-and-security-considerations).
+> Menu names and import steps vary by Switch Console version. Refer to the [Switch documentation](https://docs.flintai.dev/flintai/switch/index) for the exact flow.
 
-## 9. Provider independence
+### Step 4. Apply the agent instructions
 
-The instructions here do not depend on a specific model or provider. Any agent that can (a) use a working directory, (b) read instruction files such as `AGENTS.md`, and (c) take part in a Switch room can use this preset. Whether a given provider auto-loads `AGENTS.md` should be checked in that provider's documentation; the onboarding prompt in step 12 covers the case where it does not.
+If your provider does not automatically load `AGENTS.md`, paste the prompt from [`config/agent-instructions.md`](config/agent-instructions.md) into the agent's instruction field. `AGENTS.md` remains the authoritative operating document.
 
-## 10. Configure the agent in Switch Console
+### Step 5. Create the shared room and add Xander
 
-In Switch Console, create or register a new agent using the provider you set up (Codex or OpenCode). Name it **Clarity**. Exact menu names and steps vary by Switch version, so consult Switch's official documentation for how to add an agent; this guide does not assume particular menu locations.
+1. Create **one** shared room for Product and Engineering. A single room lets both sides see the same conversation.
+2. Add the Xander agent to the room.
+3. Invite Product Managers and Engineers.
 
-## 11. Set the repository as the agent's working directory
+Suggested note to the team:
 
-Configure the agent's working directory to the absolute path of your cloned `product-engineering-clarity` folder. This is what lets the agent read `AGENTS.md`, `context/`, and `workflows/`. If your Switch version has no such setting, start the provider from inside the repository directory instead.
+> *Xander is a neutral assistant that helps us understand each other. It does not make decisions. Ask it to explain, clarify, or help align, in plain language.*
 
-## 12. Configure the agent's instructions
+### Step 6. Verify
 
-Open [`config/agent-instructions.md`](config/agent-instructions.md) and paste the prompt block into whichever field in your Switch/agent setup accepts agent instructions. `AGENTS.md` remains the authoritative operating document.
+Post the sample messages below and compare Xander's behavior with the matching workflow file and [`examples/`](examples/).
 
-[`config/preset.yaml`](config/preset.yaml) is a human-readable manifest of this preset. It is **our own documented format**, not an official Switch schema, and is not read by Switch automatically unless you have verified that it is.
+| Test message | Expected behavior |
+|---|---|
+| "Can we make the dashboard load instantly?" | Targeted clarifying questions; no invented targets |
+| "The initial API response is slow because we're fetching too much data synchronously." | Plain-language explanation with caveats |
+| "Customers are abandoning onboarding because the dashboard is slow." | Problem, outcome, and missing information; claimed cause marked unverified |
+| "Xander, summarize what we've agreed on this feature." | Table separating Agreed / Proposed / Open |
+| Product: "Must ship before launch." Engineering: "It depends on an unfinished rework." | Both positions and trade-offs, with no recommendation |
 
-## 13. Create the shared room
+Also test **silence**: post a clear message such as "Standup moved to 10:30" and confirm Xander does not intervene. Additional scenarios are available in [`test-case/`](test-case/).
 
-Create **one** room named `product-engineering-clarity`. Do not create separate departmental channels at first; one shared room is what lets both sides see the same conversation.
+## 5. Changing the Provider
 
-## 14. Add the agent to the room
+The provider is controlled by a single field in the preset. To switch from one provider to another, open the preset file in [`config/`](config/) and change the `provider:` value:
 
-Add Clarity to the room using Switch's mechanism for adding agents. Whether the agent receives every message, only mentions, or only specific triggers depends on your Switch configuration. **Do not assume Clarity monitors every message** unless you have confirmed that behaviour. If it is mention-based, tell your team to mention it, or to tell it what to look at.
+```yaml
+provider: cursor    # change to your preferred provider, e.g. codex or claude
+```
 
-## 15. Invite Product and Engineering members
+After editing:
 
-Invite the relevant Product Managers and Engineers to the room. Send them a short note: *"Clarity is a neutral assistant that helps us understand each other. It doesn't make decisions. You can ask it to explain, clarify, or help align, in plain language."*
+1. Confirm the new provider's CLI is installed and authenticated (see [Section 3.2](#32-agent-cli-choose-at-least-one)).
+2. Re-import or update the preset in Switch Console.
+3. Restart the agent session so the change takes effect.
 
-## 16. Test the five workflows
+> Use the provider identifier that your Switch Console version supports. The instructions in this repository do not depend on a specific model or provider.
 
-Post these in the room and check the behaviour against the matching workflow file and examples.
+## 6. Repository Structure
 
-| # | Test message | Expect | Workflow |
-|---|---|---|---|
-| 1 | "Can we make the dashboard load instantly?" | Targeted questions; no invented target | [clarify](workflows/clarify.md) |
-| 2 | "The initial API response is slow because we're fetching too much data synchronously. We can lazy-load secondary widgets." | Plain-language explanation with caveats | [technical-to-business](workflows/technical-to-business.md) |
-| 3 | "Customers are abandoning onboarding because the dashboard takes too long to load." | Problem, outcome, journey, missing info; claimed cause marked unverified | [business-to-technical](workflows/business-to-technical.md) |
-| 4 | "Clarity, can you summarise what we've agreed on this feature?" | Table separating Agreed / Proposed / Open | [requirements-alignment](workflows/requirements-alignment.md) |
-| 5 | Product: "Must ship before launch." Engineering: "It depends on an unfinished rework." | Both positions, trade-offs, options without a recommendation | [priority-alignment](workflows/priority-alignment.md) |
+```
+XANDER-WORKFLOW/
+├── AGENTS.md          # Master operating instructions for Xander
+├── README.md          # This file
+├── config/            # Preset and agent onboarding instructions
+├── context/           # Reference profiles: Product and Engineering
+├── instructions/      # Role definition, tone, format, and certainty rules
+├── workflows/         # The five core workflows
+├── examples/          # Illustrative example conversations
+└── test-case/         # Test scenarios for validating behavior
+```
 
-Also test **silence**: post a clear message ("Standup moved to 10:30") and confirm Clarity does not intervene. Compare with the transcripts in [`examples/`](examples/).
+## 7. Core Workflows
 
-## 17. Customise department context
+| Workflow | Purpose |
+|---|---|
+| **Clarification** | Resolve ambiguity with targeted questions before work proceeds |
+| **Technical-to-Business Translation** | Explain engineering concepts in plain, outcome-focused language |
+| **Business-to-Technical Translation** | Convert product intent into clear, actionable technical context |
+| **Requirements Alignment** | Separate what is agreed, proposed, and still open |
+| **Priority Alignment** | Present both positions and trade-offs without making the decision |
 
-Edit [`context/product-team.md`](context/product-team.md) and [`context/engineering-team.md`](context/engineering-team.md):
+## 8. Customizing Context
 
-- Add your own terms (e.g. what "launch", "P0", or "done" mean at your company).
-- Describe your actual architecture or stack in general terms. Avoid confidential detail unless the agent's provider is approved for it.
-- Update responsibilities and processes to match your teams.
+Edit the files in [`context/`](context/) to reflect your organization:
 
-Keep the "general reference profile" notes so the agent treats unlisted details as unknown. Commit changes so every teammate's Clarity setup stays consistent.
+- Add company-specific terms (for example, what "launch", "P0", or "done" mean to your teams).
+- Describe your architecture and stack in general terms.
+- Update responsibilities and processes to match how your teams work.
 
-## 18. Troubleshooting
+Commit changes so every teammate's Xander setup stays consistent.
+
+## 9. Troubleshooting
 
 | Symptom | Things to check |
 |---|---|
-| Clarity doesn't respond | Is it added to the room? Does your Switch setup deliver all messages or only mentions? Is the provider running and authenticated? |
-| Clarity ignores the repo rules | Working directory set correctly? Provider reads `AGENTS.md`? If not, paste [`config/agent-instructions.md`](config/agent-instructions.md). |
-| Too chatty | Re-emphasise the "intervene only when it materially improves understanding" rule; check the agent isn't running every workflow. |
-| Too quiet | Ask explicitly ("Clarity, can you explain that for Product?"); check delivery settings. |
-| Invents targets/dates | Reinforce `AGENTS.md` section 5; try a more capable model. |
-| Rate-limit errors (free tier) | See your provider's current quota terms; reduce usage or change provider. |
-| Missing-file references | Verify the folder structure matches [section 4](#4-repository-structure). |
+| Xander does not respond | Is it added to the room? Does your setup deliver all messages or only mentions? Is the provider CLI running and authenticated? |
+| Xander ignores repository rules | Is the working directory set correctly? If the provider does not read `AGENTS.md`, paste `config/agent-instructions.md`. |
+| Too chatty | Re-emphasize the "intervene only when it materially improves understanding" rule. |
+| Too quiet | Ask explicitly (for example, "Xander, can you explain that for Product?") and check delivery settings. |
+| Provider change has no effect | Confirm the `provider:` value, re-import the preset, and restart the agent session. |
 
-## 19. Privacy and security considerations
+## 10. Privacy and Security
 
-- Give the agent access **only to authorised rooms and conversations**.
-- Anything in the room may be sent to the model provider you configure. Check that provider's data handling and retention terms.
-- **Gemini free tier:** terms and data handling are set by Google and may differ from paid tiers. Don't assume it is suitable for confidential company or customer data.
-- Don't put secrets, credentials, or personal data in this repository or in `context/` files.
-- Keep API keys out of version control.
-- The agent is instructed not to modify files unless asked. Still, run it with the least file access your setup allows.
-- Review your organisation's policies on third-party AI services before use.
+- Grant the agent access only to authorized rooms and conversations.
+- Content in the room may be sent to the model provider you configure. Review that provider's data handling and retention terms.
+- Do not store secrets, credentials, or personal data in this repository or in `context/` files.
+- Keep API keys and tokens out of version control.
+- Run the agent with the least file access your setup allows.
+- Review your organization's policy on third-party AI services before use.
 
-## 20. Known limitations
+## 11. Known Limitations
 
-- **Not verified:** Switch Console menu names, agent-onboarding steps, trigger/mention behaviour, and whether Switch can import this repository directly. This package does not claim one-click import.
-- `config/preset.yaml` is a project-specific manifest, not an official Switch schema.
-- Provider installation commands are intentionally omitted; follow each tool's official documentation.
-- Automatic monitoring of all room messages depends on your Switch configuration and is not guaranteed.
-- Model quality varies; smaller or free-tier models may follow the rules less reliably.
-- Clarity cannot verify claims about your systems or customers; it only works with what the room provides.
-- Example conversations are illustrative and fictional.
+- Switch Console menu names, import steps, and mention or trigger behavior vary by version.
+- Automatic monitoring of every room message depends on your Switch configuration.
+- Output quality varies by provider and model.
+- Xander cannot verify claims about your systems or customers; it works only with what the room provides.
+- Example conversations are illustrative.
