@@ -1,4 +1,4 @@
-# Product Team — General Reference Profile
+# Product Team : General Reference Profile
 
 > **This is a general reference profile, not an assumption about your organisation.** Companies differ in titles, processes, and vocabulary. Edit this file to reflect your own terminology, responsibilities, and priorities (see the README section "Customising department context"). If the room contradicts this file, trust the room.
 
