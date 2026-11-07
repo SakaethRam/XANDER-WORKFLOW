@@ -1,4 +1,4 @@
-# Engineering Team — General Reference Profile
+# Engineering Team : General Reference Profile
 
 > **This is a general reference profile, not an assumption about your organisation.** Companies differ in roles, stacks, processes, and vocabulary. Edit this file to reflect your own architecture, terminology, and practices (see the README section "Customising department context"). If the room contradicts this file, trust the room.
 
@@ -46,7 +46,7 @@ Correctness, reliability, security, maintainability, predictable delivery, avoid
 - Needs requirements translated into **concrete behaviour, measurable targets, and scope boundaries**.
 - Uses terms with exact meanings that can sound abstract or negative to non-engineers.
 
-## What Clarity should keep in mind
+## What Xander should keep in mind
 - Preserve technical caveats and uncertainty when translating; do not turn "likely" into "will".
 - Ask Product for the user problem and measure rather than inventing a technical target.
 - Do not estimate effort or assert feasibility; relay what Engineering said and ask when it is missing.
