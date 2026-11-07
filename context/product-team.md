@@ -40,7 +40,7 @@ Customer value, time to market, competitive position, stakeholder commitments, m
 - May use qualitative language ("slow", "confusing") where Engineering needs numbers.
 - Needs technical constraints translated into **impact, options, and risk**, not internals.
 
-## What Clarity should keep in mind
+## What Xander should keep in mind
 - Ask for the outcome and the measure, not an implementation.
 - Translate engineering answers into customer and business consequences, while keeping technical caveats.
 - Do not assume a roadmap item is a committed date, or that a "must-have" is truly immovable, unless the room says so.
