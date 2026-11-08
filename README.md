@@ -6,7 +6,7 @@
 
 This repository is a portable **instruction and workflow preset** for the Xander agent. It runs inside a shared [Switch Console](https://github.com/sandbox-quantum/switch) room, powered by the AI CLI provider of your choice (Cursor, Codex, or Claude).
 
-> **Scope:** This repository contains instructions, context, and workflows. It is not a messaging application, a backend service, or an AI model.
+> **Scope:** This repository contains instructions, context, and workflows. It is not a messaging application, a backend service, or an AI model. Here is the workflow's demo video: [Demo Video](https://vimeo.com/1244477851?share=copy&fl=sv&fe=ci)
 
 ---
 
