@@ -188,3 +188,9 @@ Commit changes so every teammate's Xander setup stays consistent.
 - Output quality varies by provider and model.
 - Xander cannot verify claims about your systems or customers; it works only with what the room provides.
 - Example conversations are illustrative.
+
+---
+
+# License
+
+XANDER WORKFLOW is distributed under the terms defined in `LICENSE`.
